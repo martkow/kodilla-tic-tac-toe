@@ -14,6 +14,11 @@ public class UserMessage {
             Enter board size:
             3 -> 3x3 board
             10 -> 10x10 board""";
+
+    private static final String setDifficultyLevelMessage = """
+            Set difficulty level:
+            0 -> Easy
+            1 -> Medium""";
     private static final String playersMessage = "We have the following players:";
     private static final String setPlayerMessage = "Set players:";
     private static final String endWinnerMessage = "End of the game!... Winner is... ";
@@ -53,5 +58,9 @@ public class UserMessage {
 
     public static void printSetBoardSizeMessage() {
         System.out.println(setBoardMessage);
+    }
+
+    public static void printSetDifficultyLevelMessage() {
+        System.out.println(setDifficultyLevelMessage);
     }
 }

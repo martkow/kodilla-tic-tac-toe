@@ -2,15 +2,15 @@ package player;
 
 public class Player {
     private String playerName;
-    private boolean isSystemPlayer;
+    private boolean systemPlayer;
 
-    public Player(String playerName, boolean isSystemPlayer) {
+    public Player(String playerName, boolean systemPlayer) {
         this.playerName = playerName;
-        this.isSystemPlayer = isSystemPlayer;
+        this.systemPlayer = systemPlayer;
     }
 
     public boolean isSystemPlayer() {
-        return isSystemPlayer;
+        return systemPlayer;
     }
 
     @Override

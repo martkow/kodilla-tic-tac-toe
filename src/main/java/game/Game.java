@@ -3,18 +3,25 @@ package game;
 import board.Board;
 import board.BoardSizeNotAvailableException;
 import board.MoveNotAvailableException;
+import game.exception.DifficultyLevelNotAvailableException;
+import game.move.Move;
+import game.move.MoveType;
+import game.strategy.SmartMovesSeeker;
 import message.ExceptionMessage;
 import message.UserMessage;
 import player.Player;
+import ranking.RankingHistory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
     private Scanner scanner = new Scanner(System.in);
     private Board board;
+    private Move lastPlayerMove;
+    private int level;
+    private final String SYSTEM_PLAYER = "System";
 
     public Board getBoard() {
         return board;
@@ -40,6 +47,28 @@ public class Game {
         }
     }
 
+    public void setDifficultyLevel() {
+        while (true) {
+            try {
+                UserMessage.printSetDifficultyLevelMessage();
+                int i = Integer.parseInt(scanner.nextLine());
+
+                if (i != 0 && i != 1) {
+                    throw new DifficultyLevelNotAvailableException(ExceptionMessage.getDifficultyLevelNotAvailableMessage());
+                } else {
+                    level = i;
+                }
+                break;
+            } catch (Exception e) {
+                if (e instanceof DifficultyLevelNotAvailableException) {
+                    System.out.println(e.getMessage());
+                } else {
+                    ExceptionMessage.printWrongDataMessage();
+                }
+            }
+        }
+    }
+
     public List<Player> setPlayers() {
         List<Player> players = new ArrayList<>();
 
@@ -49,7 +78,7 @@ public class Game {
             players.add(new Player(scanner.nextLine(), false));
         }
 
-        players.add(new Player("System", true));
+        players.add(new Player(SYSTEM_PLAYER, true));
 
         UserMessage.printPlayersMessage(players);
         return players;
@@ -61,9 +90,10 @@ public class Game {
             while (true) {
                 try {
                     String userMove = getUserMove();
-                    int[] move = processUserMove(userMove);
+                    Move move = processUserMove(userMove);
 
-                    board.setValueForField(move[0], move[1], move[2]);
+                    lastPlayerMove = move;
+                    setMove(move);
                     board.printBoard();
                     break;
                 } catch (Exception e) {
@@ -85,12 +115,13 @@ public class Game {
         return scanner.nextLine();
     }
 
-    private int[] processUserMove(String userMove) {
+    private Move processUserMove(String userMove) {
         int fieldNumber = Integer.parseInt(userMove.substring(0, userMove.indexOf(" ")));
         int[] element = mapNumberToBoardElement(fieldNumber);
-        int type = MoveType.valueOf(userMove.substring(userMove.indexOf(" ")).trim().toUpperCase()).equals(MoveType.CIRCLE) ? 0 : 1;
 
-        return new int[]{element[0], element[1], type};
+        MoveType moveType = MoveType.valueOf(userMove.substring(userMove.indexOf(" ")).trim().toUpperCase());
+
+        return new Move(element[0], element[1], moveType);
     }
 
     private int[] mapNumberToBoardElement(int i) throws IllegalArgumentException {
@@ -108,17 +139,19 @@ public class Game {
     }
 
     private void setSystemMove() {
-        Random random = new Random();
-        while (true) {
-            int i = random.nextInt(board.getBoardSize());
-            int j = random.nextInt(board.getBoardSize());
-            int value = random.nextInt(2);
-
-            if (board.isFieldFree(i, j)) {
-                board.setValueForFreeField(i, j , value);
-                break;
-            }
+        if (level == 0) {
+            setFreeMove(SmartMovesSeeker.seekForAnyFreeSmartMove(board, lastPlayerMove));
+        } else {
+            setFreeMove(SmartMovesSeeker.seekForAdjacentFreeSmartMove(board, lastPlayerMove));
         }
+    }
+
+    private void setFreeMove(Move move) {
+        board.setValueForFreeField(move.getRow(), move.getColumn(), move.getMoveType().equals(MoveType.CIRCLE) ? -1 : 1);
+    }
+
+    private void setMove(Move move) throws MoveNotAvailableException {
+        board.setValueForField(move.getRow(), move.getColumn(), move.getMoveType().equals(MoveType.CIRCLE) ? -1 : 1);
     }
 
     public boolean isGameWon() {
@@ -126,7 +159,7 @@ public class Game {
     }
 
     public boolean isGamePossibleToWin() {
-        return board.hasAnyMatch(-1);
+        return board.hasAnyMatch(0);
     }
 
     public void finishGameWithWinner(Player player) {

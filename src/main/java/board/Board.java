@@ -12,12 +12,12 @@ public class Board {
         if (i != 3 && i != 10) {
             throw new BoardSizeNotAvailableException(ExceptionMessage.getBoardSizeNotAvailableMessage(i));
         } else {
+            board = new int[i][i];
+
             if (i == 3) {
-                board = new int[][]{{-1, -1, -1}, {-1, -1, -1}, {-1, -1, -1}};
                 boardSize = 3;
                 minNoOfElements = 3;
             } else {
-                board = new int[][]{{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}, {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
                 boardSize = 10;
                 minNoOfElements = 5;
             }
@@ -41,7 +41,7 @@ public class Board {
     }
 
     public boolean isFieldFree(int i, int j) {
-        return board[i][j] == -1;
+        return board[i][j] == 0;
     }
 
     public boolean isLine() {
@@ -72,7 +72,7 @@ public class Board {
     }
 
     private boolean isNextNAdjacentElementsEqualAndSet(int i, int j, int n, boolean inRow, boolean inColumn, boolean reverseDiagonal) {
-        if (board[i][j] != -1) {
+        if (board[i][j] != 0) {
             for (int k = 1; k < n; k++) {
                 if (board[i][j] != board[inRow ? i : i + k][inColumn ? j : (reverseDiagonal ? j - k : j + k)]) {
                     return false;
@@ -107,6 +107,6 @@ public class Board {
     }
 
     private String printFieldValue(int i, int j) {
-        return board[i][j] == -1 ? " " : (board[i][j] == 0 ? "O" : "X");
+        return board[i][j] == 0 ? " " : (board[i][j] == -1 ? "O" : "X");
     }
 }
