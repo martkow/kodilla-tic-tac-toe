@@ -1,17 +1,18 @@
 package player;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
+import java.util.Objects;
+
+@EqualsAndHashCode
+@Getter
+@AllArgsConstructor
 public class Player {
     private String playerName;
     private boolean systemPlayer;
-
-    public Player(String playerName, boolean systemPlayer) {
-        this.playerName = playerName;
-        this.systemPlayer = systemPlayer;
-    }
-
-    public boolean isSystemPlayer() {
-        return systemPlayer;
-    }
 
     @Override
     public String toString() {

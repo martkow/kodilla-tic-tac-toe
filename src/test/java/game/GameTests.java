@@ -8,16 +8,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Tests for Game class")
-public class GameTestSuite {
+public class GameTests {
     @DisplayName("3x3 Board. Test case for isGameWon method: CIRCLES in 1st row")
     @Test
     void testCase3x3BoardForIsGameWonMethodCirclesInFirstRow() throws MoveNotAvailableException, BoardSizeNotAvailableException {
         // Given
         Game game = new Game();
         game.setBoard(3);
-        game.getBoard().setValueForField(0,0, 0);
-        game.getBoard().setValueForField(0,1, 0);
-        game.getBoard().setValueForField(0,2, 0);
+        game.getBoard().setValueForField(0,0, -1);
+        game.getBoard().setValueForField(0,1, -1);
+        game.getBoard().setValueForField(0,2, -1);
         // When
         boolean result = game.isGameWon();
         // Then
@@ -30,9 +30,9 @@ public class GameTestSuite {
         // Given
         Game game = new Game();
         game.setBoard(3);
-        game.getBoard().setValueForField(1,0, 0);
-        game.getBoard().setValueForField(1,1, 0);
-        game.getBoard().setValueForField(1,2, 0);
+        game.getBoard().setValueForField(1,0, -1);
+        game.getBoard().setValueForField(1,1, -1);
+        game.getBoard().setValueForField(1,2, -1);
         // When
         boolean result = game.isGameWon();
         // Then
@@ -45,9 +45,9 @@ public class GameTestSuite {
         // Given
         Game game = new Game();
         game.setBoard(3);
-        game.getBoard().setValueForField(2,0, 0);
-        game.getBoard().setValueForField(2,1, 0);
-        game.getBoard().setValueForField(2,2, 0);
+        game.getBoard().setValueForField(2,0, -1);
+        game.getBoard().setValueForField(2,1, -1);
+        game.getBoard().setValueForField(2,2, -1);
         // When
         boolean result = game.isGameWon();
         // Then
@@ -60,9 +60,9 @@ public class GameTestSuite {
         // Given
         Game game = new Game();
         game.setBoard(3);
-        game.getBoard().setValueForField(0,0, 0);
-        game.getBoard().setValueForField(1,0, 0);
-        game.getBoard().setValueForField(2,0, 0);
+        game.getBoard().setValueForField(0,0, -1);
+        game.getBoard().setValueForField(1,0, -1);
+        game.getBoard().setValueForField(2,0, -1);
         // When
         boolean result = game.isGameWon();
         // Then
@@ -75,9 +75,9 @@ public class GameTestSuite {
         // Given
         Game game = new Game();
         game.setBoard(3);
-        game.getBoard().setValueForField(0,1, 0);
-        game.getBoard().setValueForField(1,1, 0);
-        game.getBoard().setValueForField(2,1, 0);
+        game.getBoard().setValueForField(0,1, -1);
+        game.getBoard().setValueForField(1,1, -1);
+        game.getBoard().setValueForField(2,1, -1);
         // When
         boolean result = game.isGameWon();
         // Then
@@ -90,9 +90,9 @@ public class GameTestSuite {
         // Given
         Game game = new Game();
         game.setBoard(3);
-        game.getBoard().setValueForField(0,2, 0);
-        game.getBoard().setValueForField(1,2, 0);
-        game.getBoard().setValueForField(2,2, 0);
+        game.getBoard().setValueForField(0,2, -1);
+        game.getBoard().setValueForField(1,2, -1);
+        game.getBoard().setValueForField(2,2, -1);
         // When
         boolean result = game.isGameWon();
         // Then
@@ -105,9 +105,9 @@ public class GameTestSuite {
         // Given
         Game game = new Game();
         game.setBoard(3);
-        game.getBoard().setValueForField(0,0, 0);
-        game.getBoard().setValueForField(1,1, 0);
-        game.getBoard().setValueForField(2,2, 0);
+        game.getBoard().setValueForField(0,0, -1);
+        game.getBoard().setValueForField(1,1, -1);
+        game.getBoard().setValueForField(2,2, -1);
         // When
         boolean result = game.isGameWon();
         // Then
@@ -120,9 +120,9 @@ public class GameTestSuite {
         // Given
         Game game = new Game();
         game.setBoard(3);
-        game.getBoard().setValueForField(0,2, 0);
-        game.getBoard().setValueForField(1,1, 0);
-        game.getBoard().setValueForField(2,0, 0);
+        game.getBoard().setValueForField(0,2, -1);
+        game.getBoard().setValueForField(1,1, -1);
+        game.getBoard().setValueForField(2,0, -1);
         // When
         boolean result = game.isGameWon();
         // Then
@@ -255,14 +255,14 @@ public class GameTestSuite {
         // Given
         Game game = new Game();
         game.setBoard(3);
-        game.getBoard().setValueForField(0,0, 0);
+        game.getBoard().setValueForField(0,0, -1);
         game.getBoard().setValueForField(0,1, 1);
-        game.getBoard().setValueForField(0,2, 0);
+        game.getBoard().setValueForField(0,2, -1);
         game.getBoard().setValueForField(1,0, 1);
-        game.getBoard().setValueForField(1,1, 0);
+        game.getBoard().setValueForField(1,1, -1);
         game.getBoard().setValueForField(1,2, 1);
         game.getBoard().setValueForField(2,0, 1);
-        game.getBoard().setValueForField(2,1, 0);
+        game.getBoard().setValueForField(2,1, -1);
         game.getBoard().setValueForField(2,2, 1);
         // When
         boolean resultIsGamePossibleToWin = game.isGamePossibleToWin();
@@ -279,7 +279,7 @@ public class GameTestSuite {
         Game game = new Game();
         game.setBoard(10);
         for (int j = 0; j < 5; j++) {
-            game.getBoard().setValueForField(0, j, 0);
+            game.getBoard().setValueForField(0, j, -1);
         }
         // When
         boolean result = game.isGameWon();
@@ -294,7 +294,7 @@ public class GameTestSuite {
         Game game = new Game();
         game.setBoard(10);
         for (int j = 0; j < 5; j++) {
-            game.getBoard().setValueForField(4, j, 0);
+            game.getBoard().setValueForField(4, j, -1);
         }
         // When
         boolean result = game.isGameWon();
@@ -309,7 +309,7 @@ public class GameTestSuite {
         Game game = new Game();
         game.setBoard(10);
         for (int j = 0; j < 5; j++) {
-            game.getBoard().setValueForField(9, j, 0);
+            game.getBoard().setValueForField(9, j, -1);
         }
         // When
         boolean result = game.isGameWon();
@@ -324,7 +324,7 @@ public class GameTestSuite {
         Game game = new Game();
         game.setBoard(10);
         for (int i = 0; i < 5; i++) {
-            game.getBoard().setValueForField(i, 0, 0);
+            game.getBoard().setValueForField(i, 0, -1);
         }
         // When
         boolean result = game.isGameWon();
@@ -339,7 +339,7 @@ public class GameTestSuite {
         Game game = new Game();
         game.setBoard(10);
         for (int i = 0; i < 5; i++) {
-            game.getBoard().setValueForField(i, 4, 0);
+            game.getBoard().setValueForField(i, 4, -1);
         }
         // When
         boolean result = game.isGameWon();
@@ -354,7 +354,7 @@ public class GameTestSuite {
         Game game = new Game();
         game.setBoard(10);
         for (int i = 0; i < 5; i++) {
-            game.getBoard().setValueForField(i, 9, 0);
+            game.getBoard().setValueForField(i, 9, -1);
         }
         // When
         boolean result = game.isGameWon();
@@ -369,7 +369,7 @@ public class GameTestSuite {
         Game game = new Game();
         game.setBoard(10);
         for (int i = 0; i < 5; i++) {
-            game.getBoard().setValueForField(i, i, 0);
+            game.getBoard().setValueForField(i, i, -1);
         }
         // When
         boolean result = game.isGameWon();
@@ -384,7 +384,7 @@ public class GameTestSuite {
         Game game = new Game();
         game.setBoard(10);
         for (int i = 0; i < 5; i++) {
-            game.getBoard().setValueForField(i, 9 - i , 0);
+            game.getBoard().setValueForField(i, 9 - i , -1);
         }
         // When
         boolean result = game.isGameWon();

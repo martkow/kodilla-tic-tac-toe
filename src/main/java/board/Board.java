@@ -1,7 +1,9 @@
 package board;
 
+import lombok.Getter;
 import message.ExceptionMessage;
 
+@Getter
 public class Board {
 
     private int[][] board;
@@ -92,21 +94,7 @@ public class Board {
         return false;
     }
 
-    public void printBoard() {
-        for (int i = 0; i < boardSize; i++) {
-            printRow(i);
-        }
-    }
-
-    private void printRow(int row) {
-        System.out.print("|");
-        for (int j = 0; j < boardSize; j++) {
-            System.out.print(" " + printFieldValue(row, j) + " |");
-        }
-        System.out.print("\n");
-    }
-
-    private String printFieldValue(int i, int j) {
-        return board[i][j] == 0 ? " " : (board[i][j] == -1 ? "O" : "X");
+    public int getFieldValue(int i, int j) {
+        return board[i][j];
     }
 }

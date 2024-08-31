@@ -1,2 +1,12 @@
 bubu,1
 System,0
+bubu,1
+System,0
+Bubu,0
+System,0
+Bubuslaw,0
+System,0
+Markow,1
+System,0
+Player(playerName=Bubu),1
+Player(playerName=System),0
